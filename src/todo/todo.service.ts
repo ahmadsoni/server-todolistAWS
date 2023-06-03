@@ -16,6 +16,11 @@ export class TodoService {
       where: { id },
     });
   }
+  findByActivityId(activity_group_id: number) {
+    return this.prisma.todo.findMany({
+      where: { activity_group_id },
+    });
+  }
 
   update(id: number, updateTodoDto: UpdateTodoDto) {
     return this.prisma.todo.update({

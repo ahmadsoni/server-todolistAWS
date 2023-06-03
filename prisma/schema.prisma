@@ -17,9 +17,17 @@ model Activity {
 
 model Todo {
   id                Int      @id @default(autoincrement())
-  activity_group_id Int
   title             String   @db.VarChar(255)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  active            Boolean  @default(true)
+  priority          Priority @default(MEDIUM)
   activity          Activity @relation(fields: [activity_group_id], references: [id])
+  activity_group_id Int
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
 }

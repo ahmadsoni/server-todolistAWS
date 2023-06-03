@@ -5,7 +5,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { ActivityService } from '../activity/activity.service';
 @Module({
   controllers: [TodoController],
-  providers: [TodoService, ActivityService],
+  providers: [ActivityService, TodoService],
   imports: [PrismaModule],
 })
 export class TodoModule {}

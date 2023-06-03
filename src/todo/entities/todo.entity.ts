@@ -21,7 +21,4 @@ export class TodoEntity implements Todo {
 
   @ApiProperty()
   priority: 'LOW' | 'MEDIUM' | 'HIGH';
-
-  @ApiProperty()
-  activity: any;
 }

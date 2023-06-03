@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "Priority" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
+
 -- CreateTable
 CREATE TABLE "Activity" (
     "id" SERIAL NOT NULL,
@@ -11,10 +14,12 @@ CREATE TABLE "Activity" (
 -- CreateTable
 CREATE TABLE "Todo" (
     "id" SERIAL NOT NULL,
-    "activity_group_id" INTEGER NOT NULL,
     "title" VARCHAR(255) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
+    "priority" "Priority" NOT NULL DEFAULT 'MEDIUM',
+    "activity_group_id" INTEGER NOT NULL,
 
     CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
 );

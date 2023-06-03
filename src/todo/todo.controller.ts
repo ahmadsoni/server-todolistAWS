@@ -9,6 +9,7 @@ import {
   NotFoundException,
   ParseIntPipe,
   UseFilters,
+  Query,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
@@ -38,7 +39,12 @@ export class TodoController {
         `Activity ${createTodoDto.activity_group_id} not found`,
       );
     }
-    return this.todoService.create(createTodoDto);
+    createTodoDto.active = true;
+    const response = await this.todoService.create(createTodoDto);
+    if (!response) {
+      throw new Error('Todo not created');
+    }
+    return response;
   }
 
   @Get(':id')
@@ -49,6 +55,11 @@ export class TodoController {
       throw new NotFoundException(`Todo ${id} not found`);
     }
     return todo;
+  }
+  @Get()
+  @ApiCreatedResponse({ type: TodoEntity })
+  async findByActivityId(@Query('activity_group_id', ParseIntPipe) id: number) {
+    return await this.todoService.findByActivityId(id);
   }
 
   @Patch(':id')

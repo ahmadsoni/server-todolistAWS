@@ -32,11 +32,7 @@ export class ActivityController {
   @Get()
   @ApiCreatedResponse({ type: ActivityEntity })
   async findAll() {
-    const activity = await this.activityService.findAll();
-    if (activity.length === 0) {
-      throw new NotFoundException(`Activity not found`);
-    }
-    return activity;
+    return await this.activityService.findAll();
   }
 
   @Get(':id')

@@ -26,15 +26,13 @@ export class CreateTodoDto {
   @ApiProperty()
   title: string;
 
-  @IsString()
-  @MinLength(3)
   @IsNotEmpty()
+  @IsString()
   @IsEnum(PriorityType)
   @ApiProperty()
-  priority?: PriorityProps;
+  priority: PriorityProps;
 
   @IsBoolean()
-  @IsNotEmpty()
   @ApiProperty()
-  active?: boolean;
+  active: boolean;
 }
